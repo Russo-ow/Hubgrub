@@ -21,14 +21,11 @@ public class PlayerController : MonoBehaviour {
     }
 
     void FixedUpdate() {
-
-
         //Length of the ray
         float laserLength = 50f;
 
         //Get the first object hit by the ray
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right, laserLength);
-        //RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector2.up);
+        RaycastHit2D hit = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y) + Vector2.right, Vector2.right, laserLength);
 
         //If the collider of the object hit is not NULL
         if (hit.collider != null) {
