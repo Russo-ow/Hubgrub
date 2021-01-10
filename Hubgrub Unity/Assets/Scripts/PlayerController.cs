@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour {
 
     Rigidbody2D rb;
     public float speed;
+    public Animator anim;
 
     void Start() {
         rb = GetComponent<Rigidbody2D>();
@@ -18,10 +19,28 @@ public class PlayerController : MonoBehaviour {
 
     void Update() {
         rb.velocity = speed * new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")).normalized;
+
+        if(rb.velocity != Vector2.zero) {
+            anim.SetBool("Up", false);
+            anim.SetBool("Down", false);
+            anim.SetBool("Left", false);
+            anim.SetBool("Right", false);
+            if((rb.velocity * Vector2.up).magnitude > (rb.velocity * Vector2.right).magnitude) {
+                if(rb.velocity.y > 0)
+                    anim.SetBool("Up", true);
+                else
+                    anim.SetBool("Down", true);
+            } else {
+                if(rb.velocity.x > 0)
+                    anim.SetBool("Right", true);
+                else
+                    anim.SetBool("Left", true);
+            }
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        if (other.gameObject.CompareTag("NPC"))
+        if(other.gameObject.CompareTag("NPC"))
             other.gameObject.GetComponent<NpcController>().Kill();
 
     }
