@@ -20,7 +20,15 @@ public class PlayerController : MonoBehaviour {
         rb.velocity = speed * new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")).normalized;
     }
 
-    void FixedUpdate() {
+    private void OnTriggerEnter2D(Collider2D other) {
+        if (other.gameObject.CompareTag("NPC"))
+            other.gameObject.GetComponent<NpcController>().Kill();
+
+    }
+
+    /*void FixedUpdate() {
+        // current facing direction of player
+
         //Length of the ray
         float laserLength = 50f;
 
@@ -33,7 +41,7 @@ public class PlayerController : MonoBehaviour {
             Debug.Log("Hitting: " + hit.collider.tag);
         }
 
-        //Method to draw the ray in scene for debug purpose
+        //Method to draw the ray in scene for debug purpose < doesn't work
         Debug.DrawRay(transform.position, Vector2.right * laserLength, Color.red);
-    }
+    }*/
 }
