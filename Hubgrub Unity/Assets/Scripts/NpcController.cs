@@ -6,7 +6,7 @@ public class NpcController : MonoBehaviour {
     public Direction direction = Direction.Up;
 
     Rigidbody2D rb;
-    float speed;
+    float speed = 1;
 
     public enum Direction {
         Up,
@@ -21,7 +21,36 @@ public class NpcController : MonoBehaviour {
     }
 
     void Update() {
-        rb.velocity = Dir2Vector(direction);
+        rb.velocity = Dir2Vector(direction) * speed;
+        foreach(RaycastHit2D hit in Physics2D.RaycastAll(
+            new Vector2(transform.position.x, transform.position.y) + (Dir2Vector(direction) * .901f),
+            Dir2Vector(direction),
+            .099f
+            )) {
+            if(hit.collider.CompareTag("Maze"))
+                Redirect();
+        }
+    }
+
+    void Redirect() {
+        int numViable = 0;
+        bool[] viable = { false, false, false, false };
+        //Up
+        if(direction!=Direction.Up) {
+
+        }
+        //Down
+        if(direction!=Direction.Down) {
+
+        }
+        //Left
+        if(direction!=Direction.Left) {
+
+        }
+        //Right
+        if(direction!=Direction.Right) {
+
+        }
     }
 
     Vector2 Dir2Vector(Direction d) {
