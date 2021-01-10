@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class NpcController : MonoBehaviour {
     public Direction direction = Direction.Up;
+    public Color color;
 
     Rigidbody2D rb;
+    SpriteRenderer sp;
     float speed = 1;
 
     public enum Direction {
@@ -17,40 +19,59 @@ public class NpcController : MonoBehaviour {
 
     void Start() {
         rb = GetComponent<Rigidbody2D>();
+        sp = GetComponent<SpriteRenderer>();
+        sp.color = color;
         speed = PlayerController.instance.speed;
     }
 
-    void Update() {
+    void FixedUpdate() {
         rb.velocity = Dir2Vector(direction) * speed;
-        foreach(RaycastHit2D hit in Physics2D.RaycastAll(
-            new Vector2(transform.position.x, transform.position.y) + (Dir2Vector(direction) * .901f),
-            Dir2Vector(direction),
-            .099f
-            )) {
-            if(hit.collider.CompareTag("Maze"))
-                Redirect();
+        if(IsMaze(direction)) {
+            Redirect();
         }
     }
 
     void Redirect() {
-        int numViable = 0;
-        bool[] viable = { false, false, false, false };
+        List<Direction> options = new List<Direction>();
         //Up
-        if(direction!=Direction.Up) {
-
+        if(direction != Direction.Up) {
+            if(!IsMaze(Direction.Up)) {
+                options.Add(Direction.Up);
+            }
         }
         //Down
-        if(direction!=Direction.Down) {
-
+        if(direction != Direction.Down) {
+            if(!IsMaze(Direction.Down)) {
+                options.Add(Direction.Down);
+            }
         }
         //Left
-        if(direction!=Direction.Left) {
-
+        if(direction != Direction.Left) {
+            if(!IsMaze(Direction.Left)) {
+                options.Add(Direction.Left);
+            }
         }
         //Right
-        if(direction!=Direction.Right) {
-
+        if(direction != Direction.Right) {
+            if(!IsMaze(Direction.Right)) {
+                options.Add(Direction.Right);
+            }
         }
+        if(options.Count > 1)
+            options.Remove(OppositeDir(direction));
+        direction = options[Random.Range(0, options.Count)];
+    }
+
+    bool IsMaze(Direction d) {
+        foreach(RaycastHit2D hit in Physics2D.RaycastAll(
+            new Vector2(transform.position.x, transform.position.y) + (Dir2Vector(d) * .45001f),
+            Dir2Vector(d),
+            .1f
+            )) {
+            if(hit.collider.CompareTag("Maze"))
+                return true;
+        }
+        return false;
     }
 
     Vector2 Dir2Vector(Direction d) {
@@ -65,6 +86,21 @@ public class NpcController : MonoBehaviour {
                 return Vector2.right;
             default:
                 return Vector2.zero;
+        }
+    }
+
+    Direction OppositeDir(Direction d) {
+        switch(d) {
+            case Direction.Up:
+                return Direction.Down;
+            case Direction.Down:
+                return Direction.Up;
+            case Direction.Left:
+                return Direction.Right;
+            case Direction.Right:
+                return Direction.Left;
+            default:
+                return Direction.Up;
         }
     }
 }
