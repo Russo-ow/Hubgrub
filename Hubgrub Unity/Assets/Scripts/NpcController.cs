@@ -5,6 +5,7 @@ using UnityEngine;
 public class NpcController : MonoBehaviour {
     public Direction direction = Direction.Up;
     public Color color;
+    public Object[] destroyOnDeath;
 
     Rigidbody2D rb;
     SpriteRenderer sp;
@@ -102,5 +103,13 @@ public class NpcController : MonoBehaviour {
             default:
                 return Direction.Up;
         }
+    }
+
+    public void Kill() {
+        foreach(Object o in destroyOnDeath) {
+            Destroy(o);
+        }
+        sp.sortingOrder = -1;
+        Destroy(this);
     }
 }
