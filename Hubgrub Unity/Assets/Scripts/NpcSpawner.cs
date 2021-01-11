@@ -16,7 +16,7 @@ public class NpcSpawner : MonoBehaviour {
     }
 
     private void Start() {
-        colorsToSpawn = new List<Color>();
+        //colorsToSpawn = new List<Color>();
     }
 
     private void Update() {
