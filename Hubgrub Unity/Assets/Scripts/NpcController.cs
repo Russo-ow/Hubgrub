@@ -24,7 +24,7 @@ public class NpcController : MonoBehaviour {
         sp = GetComponent<SpriteRenderer>();
         sp.color = color;
         speed = PlayerController.instance.speed;
-        UpdateAnim(direction);
+        UpdateAnim();
     }
 
     void FixedUpdate() {
@@ -63,7 +63,7 @@ public class NpcController : MonoBehaviour {
         if(options.Count > 1)
             options.Remove(OppositeDir(direction));
         direction = options[Random.Range(0, options.Count)];
-        UpdateAnim(direction);
+        UpdateAnim();
     }
 
     bool IsMaze(Direction d) {
@@ -110,21 +110,22 @@ public class NpcController : MonoBehaviour {
 
     public void Kill() {
         anim.SetBool("Dead", true);
+        NpcSpawner.instance.RequestSpawnNPC(color);
         foreach(Object o in destroyOnDeath) {
             Destroy(o);
         }
         sp.sortingOrder = -1;
         Destroy(this);
 
-        ProgressBar.instance.NPCDeath();
+        //ProgressBar.instance.NPCDeath();
     }
 
-    void UpdateAnim(Direction d) {
+    public void UpdateAnim() {
         anim.SetBool("Up", false);
         anim.SetBool("Down", false);
         anim.SetBool("Left", false);
         anim.SetBool("Right", false);
-        switch(d) {
+        switch(direction) {
             case Direction.Up:
                 anim.SetBool("Up", true);
                 break;
