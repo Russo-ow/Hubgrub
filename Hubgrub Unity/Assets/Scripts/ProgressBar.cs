@@ -10,15 +10,23 @@ public class ProgressBar : MonoBehaviour {
     public Slider slider;
     public float bloodMoney;
 
-    IEnumerator Start() {
+    /*IEnumerator Start() {
         slider.value = slider.maxValue;
 
         while (slider.value > 0.0f) {
-            yield return new WaitForSeconds(1.0f);
-            slider.value -= 10.0f;
+            yield return new WaitForSeconds(0.1f);
+            slider.value -= 1.0f;
         }
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+*/
+    private void Update() {
+        slider.value -= Time.deltaTime * 3.0f;
+
+        if (slider.value <= 0.0f) {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
     }
 
     private void Awake() {
