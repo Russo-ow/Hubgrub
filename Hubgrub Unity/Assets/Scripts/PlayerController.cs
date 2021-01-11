@@ -40,9 +40,11 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        if(other.gameObject.CompareTag("NPC"))
+        if(other.gameObject.CompareTag("NPC")) {
             other.gameObject.GetComponent<NpcController>().Kill();
-
+            if(!anim.GetBool("Attacking"))
+                StartCoroutine(AttackAnim());
+        }
     }
 
     /*void FixedUpdate() {
@@ -63,4 +65,10 @@ public class PlayerController : MonoBehaviour {
         //Method to draw the ray in scene for debug purpose < doesn't work
         Debug.DrawRay(transform.position, Vector2.right * laserLength, Color.red);
     }*/
+
+    IEnumerator AttackAnim() {
+        anim.SetBool("Attacking", true);
+        yield return new WaitForSeconds(.51f);
+        anim.SetBool("Attacking", false);
+    }
 }

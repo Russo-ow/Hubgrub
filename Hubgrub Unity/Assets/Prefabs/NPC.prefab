@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7009093937654370477}
   m_Layer: 8
   m_Name: NPC
-  m_TagString: Untagged
+  m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -145,3 +145,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   direction: 2
   color: {r: 0, g: 0.7238133, b: 0.8867924, a: 1}
+  destroyOnDeath:
+  - {fileID: 7009093937654370478}
+  - {fileID: 7009093937654370479}
