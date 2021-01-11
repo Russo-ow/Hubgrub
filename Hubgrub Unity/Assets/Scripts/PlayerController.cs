@@ -12,9 +12,11 @@ public class PlayerController : MonoBehaviour {
 
     public AudioSource soundSource;
     public AudioClip killSound;
+    public AudioClip heartbeatSound;
 
     void Start() {
         rb = GetComponent<Rigidbody2D>();
+        StartCoroutine(HeartbeatClock());
     }
 
     private void Awake() {
@@ -76,5 +78,13 @@ public class PlayerController : MonoBehaviour {
         anim.SetBool("Attacking", true);
         yield return new WaitForSeconds(.51f);
         anim.SetBool("Attacking", false);
+    }
+
+    IEnumerator HeartbeatClock() {
+        while(true) {
+            yield return new WaitForSeconds(1);
+            if(ProgressBar.instance.slider.value < 20)
+                soundSource.PlayOneShot(heartbeatSound, Mathf.Lerp(0, 100, ProgressBar.instance.slider.value / 20));
+        }
     }
 }
