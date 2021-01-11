@@ -109,9 +109,8 @@ public class NpcController : MonoBehaviour {
     }
 
     public void Kill() {
-        //TODO erase
-        //ProgressBar.instance.NPCDeath();
-        //ScoreManager.instance.NPCDeath();
+        ProgressBar.instance.NPCDeath();
+        ScoreManager.instance.NPCDeath();
 
         anim.SetBool("Dead", true);
         NpcSpawner.instance.RequestSpawnNPC(color);

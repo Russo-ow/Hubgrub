@@ -26,6 +26,8 @@ public class ProgressBar : MonoBehaviour {
         slider.value -= Time.deltaTime * decreaseRate;
 
         if (slider.value <= 0.0f) {
+            PlayerPrefs.SetInt("score", ScoreManager.instance.Score());
+            Debug.Log(PlayerPrefs.GetInt("score"));
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }
