@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour {
     public float speed;
     public Animator anim;
 
+    public AudioSource soundSource;
     public AudioClip killSound;
 
     void Start() {
@@ -45,6 +46,7 @@ public class PlayerController : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.CompareTag("NPC")) {
             cam.StartBoogie();
+            soundSource.PlayOneShot(killSound);
             other.gameObject.GetComponent<NpcController>().Kill();
             if(!anim.GetBool("Attacking"))
                 StartCoroutine(AttackAnim());
