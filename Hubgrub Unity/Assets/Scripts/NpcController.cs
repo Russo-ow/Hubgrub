@@ -115,6 +115,8 @@ public class NpcController : MonoBehaviour {
         }
         sp.sortingOrder = -1;
         Destroy(this);
+
+        ProgressBar.instance.NPCDeath();
     }
 
     void UpdateAnim(Direction d) {

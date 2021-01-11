@@ -8,6 +8,7 @@ public class ProgressBar : MonoBehaviour {
     public static ProgressBar instance;
 
     public Slider slider;
+    public float bloodMoney;
 
     IEnumerator Start() {
         slider.value = slider.maxValue;
@@ -24,10 +25,7 @@ public class ProgressBar : MonoBehaviour {
         instance = this;
     }
 
-    // testing purposes
-    private void Update() {
-        if (Input.anyKeyDown) {
-            slider.value += 5.0f;
-        }    
+    public void NPCDeath() {
+        slider.value += bloodMoney;
     }
 }
