@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
     public static PlayerController instance;
+    public CamController cam;
 
     Rigidbody2D rb;
     public float speed;
@@ -41,6 +42,7 @@ public class PlayerController : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.CompareTag("NPC")) {
+            cam.StartBoogie();
             other.gameObject.GetComponent<NpcController>().Kill();
             if(!anim.GetBool("Attacking"))
                 StartCoroutine(AttackAnim());

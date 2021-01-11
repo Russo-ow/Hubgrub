@@ -109,14 +109,15 @@ public class NpcController : MonoBehaviour {
     }
 
     public void Kill() {
+        ProgressBar.instance.NPCDeath();
+        ScoreManager.instance.NPCDeath();
+
         anim.SetBool("Dead", true);
         foreach(Object o in destroyOnDeath) {
             Destroy(o);
         }
         sp.sortingOrder = -1;
         Destroy(this);
-
-        ProgressBar.instance.NPCDeath();
     }
 
     void UpdateAnim(Direction d) {

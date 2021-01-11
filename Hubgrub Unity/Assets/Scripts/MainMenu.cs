@@ -8,21 +8,21 @@ public class MainMenu : MonoBehaviour {
 
     public GameObject textReady;
     public GameObject textSet;
-    public GameObject textAxe;
+    public GameObject textChop;
     public Image axe;
     public GameObject buttons;
 
     void Start() {
         textReady.SetActive(false);
         textSet.SetActive(false);
-        textAxe.SetActive(false);
+        textChop.SetActive(false);
         axe.gameObject.SetActive(false);
         buttons.SetActive(false);
 
-        StartCoroutine(StartTransition(textReady, textSet, textAxe, axe, buttons));    
+        StartCoroutine(StartTransition(textReady, textSet, textChop, axe, buttons));    
     }
 
-    private IEnumerator StartTransition(GameObject tReady, GameObject tSet, GameObject tAxe, Image axe, GameObject buts) {
+    private IEnumerator StartTransition(GameObject tReady, GameObject tSet, GameObject tChop, Image axe, GameObject buts) {
         WaitForSeconds waitTime = new WaitForSeconds(1f);
 
         yield return waitTime;
@@ -32,9 +32,7 @@ public class MainMenu : MonoBehaviour {
         tSet.SetActive(true);
 
         yield return waitTime;
-        tAxe.SetActive(true);
-
-        yield return waitTime;
+        tChop.SetActive(true);
         axe.gameObject.SetActive(true);
 
         yield return waitTime;
