@@ -11,7 +11,7 @@ public class CamController : MonoBehaviour {
     private float shakeDuration = 0f;
 
     // Amplitude of the shake. A larger value shakes the camera harder.
-    private float shakeAmount = 0.7f;
+    private float shakeAmount = 0.0f;
     public float decreaseFactor = 1.0f;
     public float maxShake = 0.7f;
     public float maxShakeDuration = 1.0f;

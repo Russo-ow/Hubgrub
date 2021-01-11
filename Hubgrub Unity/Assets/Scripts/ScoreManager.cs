@@ -41,16 +41,20 @@ public class ScoreManager : MonoBehaviour {
         if (comboTimer <= 0.0f) {
             // new combo starts
             comboTimer = timeLimit;
-            Debug.Log("new combo");
+            //Debug.Log("new combo");
         } else {
             // ongoing combo
             comboTimer = timeLimit;
             multiplier++;
-            Debug.Log("ongoing combo");
+            //Debug.Log("ongoing combo");
         }
 
         score += multiplier * 100;
         murders++;
         Debug.Log("Death Count: " + murders + " Score: " + score);
+    }
+
+    public int Score() {
+        return score;
     }
 }

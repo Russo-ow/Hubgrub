@@ -6,9 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class ProgressBar : MonoBehaviour {
     public static ProgressBar instance;
-    public CamController cam;
 
     public Slider slider;
+    public float decreaseRate;
     public float bloodMoney;
 
     /*IEnumerator Start() {
@@ -23,10 +23,9 @@ public class ProgressBar : MonoBehaviour {
     }
 */
     private void Update() {
-        slider.value -= Time.deltaTime * 3.0f;
+        slider.value -= Time.deltaTime * decreaseRate;
 
         if (slider.value <= 0.0f) {
-            cam.StartBoogie();
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }
