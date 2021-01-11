@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour {
     public float speed;
     public Animator anim;
 
+    public AudioClip killSound;
+
     void Start() {
         rb = GetComponent<Rigidbody2D>();
     }
