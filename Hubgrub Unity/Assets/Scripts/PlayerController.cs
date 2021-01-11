@@ -84,7 +84,7 @@ public class PlayerController : MonoBehaviour {
         while(true) {
             yield return new WaitForSeconds(1);
             if(ProgressBar.instance.slider.value < 20)
-                soundSource.PlayOneShot(heartbeatSound, Mathf.Lerp(100, 0, ProgressBar.instance.slider.value / 20));
+                soundSource.PlayOneShot(heartbeatSound, Mathf.Lerp(30, 0, ProgressBar.instance.slider.value / 25));
         }
     }
 }
