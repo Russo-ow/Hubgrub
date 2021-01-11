@@ -109,6 +109,9 @@ public class NpcController : MonoBehaviour {
     }
 
     public void Kill() {
+        ProgressBar.instance.NPCDeath();
+        ScoreManager.instance.NPCDeath();
+
         anim.SetBool("Dead", true);
         NpcSpawner.instance.RequestSpawnNPC(color);
         foreach(Object o in destroyOnDeath) {
@@ -116,8 +119,6 @@ public class NpcController : MonoBehaviour {
         }
         sp.sortingOrder = -1;
         Destroy(this);
-
-        //ProgressBar.instance.NPCDeath();
     }
 
     public void UpdateAnim() {
