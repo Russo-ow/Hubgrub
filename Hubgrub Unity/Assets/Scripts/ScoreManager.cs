@@ -5,6 +5,9 @@ using UnityEngine;
 public class ScoreManager : MonoBehaviour {
     public static ScoreManager instance;
 
+    public TMPro.TextMeshProUGUI scoreObject;
+    public TMPro.TextMeshProUGUI multiplierObject;
+
     private int murders;
     private float comboTimer;
     private int score;
@@ -24,6 +27,9 @@ public class ScoreManager : MonoBehaviour {
     }
 
     void Update() {
+        scoreObject.text = "Score: " + score;
+        multiplierObject.text = "x" + multiplier;
+
         if (comboTimer > 0.0f) {
             // combo has been started
             comboTimer -= Time.deltaTime;
@@ -46,6 +52,7 @@ public class ScoreManager : MonoBehaviour {
             // ongoing combo
             comboTimer = timeLimit;
             multiplier++;
+            multiplierObject.text = "x" + multiplier;
             //Debug.Log("ongoing combo");
         }
 
